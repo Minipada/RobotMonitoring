@@ -28,12 +28,16 @@ do
   echo "Start $i $x"
   $i &
   sleep 5
-  PID="$(pidof ${software_name[x]})"
-  echo "pid=" $PID
+  PIDS="$(pidof ${software_name[x]})"
+  echo "PIDS=" $PIDS
 
-  while [ "$WID" = "" ]; do
-    WID=$(wmctrl -lp | grep $PID | cut "-d " -f1)
-    echo "wid=" $WID
+  for pid in $PIDS
+  do
+    WID=$(wmctrl -lp | grep $pid | cut "-d " -f1)
+    if [ -n "$WID" ]; then
+      echo "wid=" $WID
+      break
+    fi
   done
 
   # Disables maximized window
