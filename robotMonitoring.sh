@@ -1,13 +1,26 @@
 #!/bin/zsh
+setopt shwordsplit      # this can be unset by saying: unsetopt shwordsplit
 
 #Start software, get window ID, place it
-
 source /opt/ros/kinetic/setup.zsh
 source /usr/local/setup.zsh
-declare -a software_name=('PlotJuggler' 'rviz')
+
+#Netdata needs to be opened before start since the visualization is in google-chrome
+netdata
+
+declare -a software_name=('PlotJuggler' 
+                          'rviz'
+                          'chrome'
+                          )
 declare -a software_launch=("/usr/local/lib/plotjuggler/PlotJuggler" 
                             "rviz"
+                            "/usr/bin/google-chrome"
                             )
+declare -a software_parameters=("" 
+                                ""
+                                "http://localhost:19999"
+                                )
+
 
 # Gravity -> put to 0
 # X
@@ -16,6 +29,7 @@ declare -a software_launch=("/usr/local/lib/plotjuggler/PlotJuggler"
 # Height
 
 declare -a software_positions=("0,50,50,250,250"
+                               "0,50,50,250,250"
                                "0,50,50,250,250"
                               )
 
@@ -26,7 +40,7 @@ for i in "${software_launch[@]}"
 do
 
   echo "Start $i $x"
-  $i &
+  $i ${software_parameters[x]} &
   sleep 5
   PIDS="$(pidof ${software_name[x]})"
   echo "PIDS=" $PIDS
