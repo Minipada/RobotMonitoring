@@ -8,6 +8,25 @@ source /usr/local/setup.zsh
 #Netdata needs to be opened before start since the visualization is in google-chrome
 netdata
 
+# Parses arguments
+while [[ $# -gt 1 ]]
+do
+key="$1"
+
+case $key in
+    -r|--rviz)
+    RVIZ="$2"
+    shift # past argument
+    ;;
+    *)
+            # unknown option
+    ;;
+esac
+shift # past argument or value
+done
+
+echo RVIZ_OPTION = "${RVIZ}"
+
 declare -a software_name=('PlotJuggler' 
                           'rviz'
                           'chrome'
@@ -17,7 +36,7 @@ declare -a software_launch=("/usr/local/lib/plotjuggler/PlotJuggler"
                             "/usr/bin/google-chrome"
                             )
 declare -a software_parameters=("" 
-                                ""
+                                "--display-config=${RVIZ}"
                                 "--app=http://localhost:19999"
                                 )
 
@@ -44,7 +63,7 @@ x=1
 for i in "${software_launch[@]}"
 do
 
-  echo "Start $i $x"
+  echo "Start $i $x ${software_parameters[x]}"
   $i ${software_parameters[x]} &
   sleep 5
   PIDS="$(pidof ${software_name[x]})"
