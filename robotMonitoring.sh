@@ -18,7 +18,7 @@ declare -a software_launch=("/usr/local/lib/plotjuggler/PlotJuggler"
                             )
 declare -a software_parameters=("" 
                                 ""
-                                "http://localhost:19999"
+                                "--app=http://localhost:19999"
                                 )
 
 
