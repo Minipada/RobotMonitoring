@@ -21,16 +21,21 @@ declare -a software_parameters=(""
                                 "--app=http://localhost:19999"
                                 )
 
+# Gets screen size
+SCREEN_SIZE=$(xdpyinfo  | grep -oP 'dimensions:\s+\K\S+')
+echo $SCREEN_SIZE
+
+SCREEN_X=$(echo "$SCREEN_SIZE" | cut -d'x' -f1)
+SCREEN_Y=$(echo "$SCREEN_SIZE" | cut -d'x' -f2)
 
 # Gravity -> put to 0
 # X
 # Y
 # Width
 # Height
-
-declare -a software_positions=("0,50,50,250,250"
-                               "0,50,50,250,250"
-                               "0,50,50,250,250"
+declare -a software_positions=("0,$(($SCREEN_X/2)),0,$(($SCREEN_X/2)),$(($SCREEN_Y/2))"
+															 "0,0,0,$(($SCREEN_X/2)),$(($SCREEN_Y))"
+                               "0,$(($SCREEN_X/2)),$(($SCREEN_Y/2)),$(($SCREEN_X/2)),$(($SCREEN_Y/2))"
                               )
 
 ## now loop through the array
