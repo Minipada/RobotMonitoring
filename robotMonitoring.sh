@@ -24,6 +24,7 @@ case $key in
     ;;
     -r|--rviz)
     RVIZ="$2"
+		echo RVIZ_OPTION = "--display-config=${RVIZ}"
     shift # past argument
     ;;
     *)
@@ -34,7 +35,6 @@ shift # past argument or value
 done
 
 
-echo RVIZ_OPTION = "${RVIZ}"
 
 declare -a software_name=('PlotJuggler' 
                           'rviz'
@@ -45,7 +45,7 @@ declare -a software_launch=("/usr/local/lib/plotjuggler/PlotJuggler"
                             "/usr/bin/google-chrome"
                             )
 declare -a software_parameters=("" 
-                                "--display-config=${RVIZ}"
+                                "${RVIZ_OPTION}"
                                 "http://localhost:19999"
                                 )
 
