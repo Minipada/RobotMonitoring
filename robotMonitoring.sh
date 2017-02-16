@@ -5,15 +5,23 @@ setopt shwordsplit      # this can be unset by saying: unsetopt shwordsplit
 source /opt/ros/kinetic/setup.zsh
 source /usr/local/setup.zsh
 
+#source robotMonitoring.cfg
+
 #Netdata needs to be opened before start since the visualization is in google-chrome
 netdata
 
 # Parses arguments
+# http://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
 while [[ $# -gt 1 ]]
 do
 key="$1"
 
 case $key in
+   -c|--config)
+    CONFIG="$2"
+		source $CONFIG
+    shift # past argument
+    ;;
     -r|--rviz)
     RVIZ="$2"
     shift # past argument
@@ -24,6 +32,7 @@ case $key in
 esac
 shift # past argument or value
 done
+
 
 echo RVIZ_OPTION = "${RVIZ}"
 
