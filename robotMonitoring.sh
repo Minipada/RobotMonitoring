@@ -46,7 +46,7 @@ declare -a software_launch=("/usr/local/lib/plotjuggler/PlotJuggler"
                             )
 declare -a software_parameters=("" 
                                 "--display-config=${RVIZ}"
-                                "--app=http://localhost:19999"
+                                "http://localhost:19999"
                                 )
 
 # Gets screen size
