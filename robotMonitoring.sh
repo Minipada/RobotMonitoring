@@ -61,10 +61,17 @@ SCREEN_Y=$(echo "$SCREEN_SIZE" | cut -d'x' -f2)
 # Y
 # Width
 # Height
-declare -a software_positions=("0,$(($SCREEN_X/2)),0,$(($SCREEN_X/2)),$(($SCREEN_Y/2))"
-															 "0,0,0,$(($SCREEN_X/2)),$(($SCREEN_Y))"
-                               "0,$(($SCREEN_X/2)),$(($SCREEN_Y/2)),$(($SCREEN_X/2)),$(($SCREEN_Y/2))"
-                              )
+#Predefined positions
+TOP="0,0,0,$(($SCREEN_X)),$(($SCREEN_Y/2))"
+BOTTOM="0,0,$(($SCREEN_Y/2)),$(($SCREEN_X)),$(($SCREEN_Y/2))"
+LEFT="0,0,0,$(($SCREEN_X/2)),$(($SCREEN_Y))" 
+RIGHT="0,$(($SCREEN_X/2)),0,$(($SCREEN_X/2)),$(($SCREEN_Y))" 
+TOP_LEFT="0,0,0,$(($SCREEN_X/2)),$(($SCREEN_Y/2))"
+TOP_RIGHT="0,$(($SCREEN_X/2)),0,$(($SCREEN_X/2)),$(($SCREEN_Y/2))" 
+BOTTOM_LEFT="0,0,$(($SCREEN_Y/2)),$(($SCREEN_X/2)),$(($SCREEN_Y/2))"
+BOTTOM_RIGHT="0,$(($SCREEN_X/2)),$(($SCREEN_Y/2)),$(($SCREEN_X/2)),$(($SCREEN_Y/2))" 
+
+declare -a software_positions=($LEFT $TOP_RIGHT $BOTTOM_RIGHT)
 
 ## now loop through the array
 x=1
